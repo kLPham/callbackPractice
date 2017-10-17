@@ -23,6 +23,9 @@ and what you should write is the sayHi function that makes the code above work,
 // 1. Write a function called first that returns the first item of the array using a callback function
 
   // Code Here
+  function first(names, callback){
+    callback(names[0]);
+  }
 
   
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
@@ -36,6 +39,9 @@ first(names, function(firstName){
 // 2. Write a function called last which returns the last item of the array using a callback function.
 
   //Code Here
+  function last(n, callback){
+    callback(n[n.length-1])
+  }
 
 
 
@@ -49,7 +55,9 @@ last(names, function(lastName){
 // 3. Write a function called multiply that multiplies two numbers. Invoke the callback with the result of the multiplication. 
 
   //Code Here
-
+function multiply(n1,n2,callback){
+  callback(n1 * n2);
+}
 
 
 multiply(4, 3, function(answer){
@@ -63,13 +71,22 @@ multiply(4, 3, function(answer){
 // If the name does not exist, invoke the callback with false as an argument.
 
   //Code Here 
+  function contains(n1,n2,callback){
+    if (n1.indexOf(n2) !== -1 ){
+      callback(true);
+    }else{
+      callback(false);
+    }
+      
+    }
+  
 
 
 
 
 contains(names, 'Colt', function(result){
   if(result === true){
-    console.log('Colt is in the array');
+    console.log('Colt is in the array'); 
   } else {
     console.log('Colt is not in the array');
   }
@@ -80,9 +97,25 @@ contains(names, 'Colt', function(result){
 // 5. Write a function called uniq that takes the names array and removes all duplicates.
 // Invoke the callback with the modified array as an argument.
 
-  //Code Here
-
-
+  //Code Here //*check back
+  // function uniq(nameArr,callback){
+  //   var hashTable={}; //hashtable will automatically filter out the duplicate stuff
+  //   for (i=0;i<nameArr.length;i++){ //iterate through an array of names
+  //     hashTable.push(n[i]); //add the new array to the hashtable.
+  //   }
+  //  var a=[]; //h is each value in the hashtable
+  //  for (var h in hashTable) { //for every element in hte hashtable 
+  //    a.push(h);//pushing each element from the hashtable to an array(convert hashtable into an array.)
+  //   }
+  //   callback(a);
+  // }
+  function uniq(names, cb) {
+    var uniqueNumbers = names.filter(function(item, index) {
+      return names.indexOf(item) === index;
+    })
+    cb(uniqueNumbers);
+  }
+  
 
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
@@ -92,6 +125,12 @@ uniq(names, function(uniqArr){
 // 6. Write a function called each that takes in an array of names. For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
 
     //Code Here 
+    function each(n1,callback){
+      for (i=0;i<n1.length; i++){
+        callback(n1[i],i)
+      }
+      
+    };
 
 
 
@@ -105,6 +144,14 @@ each(names, function(item, indice){
 // When the correct user object is found, invoke the callback with the user object as an argument.
 
 // Code here
+
+function getUserById(users,userID,callback){
+  for (i=0; i<users.length; i++){
+    if  (users[i].id === userID){
+      callback(users[i]);
+    }
+  }
+}
 
 
 
